@@ -27,7 +27,7 @@ const Login = () => {
         isUserLoggedIn: true,
       })
     );
-    navigate("/pokemonlisting");
+    navigate("/");
   };
 
   const handleGoogleSignInClick = async () => {
