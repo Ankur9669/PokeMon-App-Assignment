@@ -7,6 +7,7 @@ import { authActions } from "../../features/auth/authSlice";
 import { pokemonActions } from "../../features/pokemons/pokemonSlice";
 import { getFilteredPokemons } from "../../util/getFilteredPokemons";
 import SearchItem from "./searchitem/SearchItem";
+import { getAuth, signOut } from "firebase/auth";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,14 @@ const Navbar = () => {
   const [searchedPokemons, setSearchedPokemons] = useState([]);
 
   const handleLogoutClick = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+      })
+      .catch((error) => {
+        // An error happened.
+      });
     dispatch(authActions.logoutUser());
   };
   const handleSearchChange = (e) => {

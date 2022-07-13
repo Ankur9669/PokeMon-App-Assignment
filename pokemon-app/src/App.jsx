@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        {/* <Route
+        <Route
           path="/pokemonlisting"
           element={
             <RequireAuth>
@@ -17,8 +17,8 @@ function App() {
             </RequireAuth>
             // <PokemonListing />
           }
-        /> */}
-        <Route path="/" element={<Login />} />
+        />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

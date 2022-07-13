@@ -1,55 +1,45 @@
-import React, { useEffect, useRef } from "react";
-import { useScript } from "../../../hooks/useScript";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+import React from "react";
+
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../../firebase";
 import { GoogleButton } from "react-google-button";
-import {
-  decodeJWTToken,
-  useAppDispatch,
-  authActions,
-  useNavigate,
-} from "./index";
+import { useAppDispatch, authActions, useNavigate } from "./index";
 import "./login.css";
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const googleButtonRef = useRef();
-  const CLIENT_ID =
-    "81019992991-rdkss3s6rqnbrv9psadoosl05epn4q7g.apps.googleusercontent.com";
 
-  const handleCallBackResponse = (res) => {
-    // localStorage.setItem("token", res.credential);
-
-    // Decoding web token and taking out user info
-    let userObject = decodeJWTToken(res.credential);
-
-    // Setting user info to redux store
-    dispatch(authActions.setUser({ user: userObject, isUserLoggedIn: true }));
-    navigate("/pokemonlisting");
-  };
-
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    const userEmail = result.user.email;
+    const userName = result.user.displayName;
+    const userImage = result.user.photoURL;
+
+    dispatch(
+      authActions.setUser({
+        user: {
+          userEmail,
+          userName,
+          userImage,
+        },
+        isUserLoggedIn: true,
+      })
+    );
+    navigate("/pokemonlisting");
   };
 
   const handleGoogleSignInClick = async () => {
     try {
-      await googleSignIn();
+      googleSignIn();
     } catch (e) {
       console.log(e);
     }
   };
+
   return (
-    <div id="sign-in-div" className="login-page">
-      {/* <div ref={googleButtonRef}></div> */}
+    <div className="login-page">
       <GoogleButton onClick={handleGoogleSignInClick} />
     </div>
   );
