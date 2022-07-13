@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/pokemonlisting"
+          path="/"
           element={
             <RequireAuth>
               <PokemonListing />
