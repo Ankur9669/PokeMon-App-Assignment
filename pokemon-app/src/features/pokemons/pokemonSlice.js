@@ -12,7 +12,6 @@ const getPokemons = createAsyncThunk("pokemon/getPokemons", async () => {
   try {
     let allPokemons = await fetchAllPokemon();
     let allPokemonDetails = await fetchAllPokemonDetails(allPokemons);
-
     return allPokemonDetails;
   } catch (e) {
     return e;
@@ -21,7 +20,11 @@ const getPokemons = createAsyncThunk("pokemon/getPokemons", async () => {
 const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
-  reducers: {},
+  reducers: {
+    setPokemons: (state, action) => {
+      state.pokemons = action.payload.pokemons;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getPokemons.fulfilled, (state, action) => {
       state.pokemons = [...action.payload];

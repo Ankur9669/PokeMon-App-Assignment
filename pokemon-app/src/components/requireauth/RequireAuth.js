@@ -1,5 +1,5 @@
 import { useLocation, Navigate } from "react-router-dom";
-import { useAppSelector } from "../../../app/hooks";
+import { useAppSelector } from "../../app/hooks";
 
 const RequireAuth = ({ children }) => {
   const location = useLocation();

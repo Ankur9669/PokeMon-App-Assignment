@@ -1,7 +1,4 @@
-.pokemon-listing-page {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+.pokemon-listing-page { 
     width: 100%;
     min-height: 100vh;
     background: hsla(16, 100%, 76%, 1);
@@ -9,4 +6,9 @@
     background: -moz-linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);
     background: -webkit-linear-gradient(90deg, hsla(16, 100%, 76%, 1) 0%, hsla(49, 100%, 81%, 1) 100%);
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#FFA585", endColorstr="#FFEDA0", GradientType=1 );
+}
+.pokemon-listing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }

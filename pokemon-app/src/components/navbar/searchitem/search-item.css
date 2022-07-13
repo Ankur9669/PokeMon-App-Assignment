@@ -1,0 +1,25 @@
+.search-item-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+}
+.search-item-image-container {
+    width: 50px;
+    height: 50px;
+    flex: 1;
+}
+.search-item-image{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%; 
+}
+.search-item-content-container {
+    flex: 2;
+}
+.search-item-text {
+    margin: 0.5rem 0;
+}
+.search-item-text-bold {
+    font-weight: var(--font-weight-bold);
+}
