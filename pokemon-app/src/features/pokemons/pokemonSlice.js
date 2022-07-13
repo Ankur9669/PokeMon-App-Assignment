@@ -12,6 +12,7 @@ const getPokemons = createAsyncThunk("pokemon/getPokemons", async () => {
   try {
     let allPokemons = await fetchAllPokemon();
     let allPokemonDetails = await fetchAllPokemonDetails(allPokemons);
+
     return allPokemonDetails;
   } catch (e) {
     return e;

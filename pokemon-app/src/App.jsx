@@ -10,14 +10,15 @@ function App() {
     <div className="App">
       <Routes>
         <Route
-          path="/pokemonlisting"
+          path="/"
           element={
-            <RequireAuth>
-              <PokemonListing />
-            </RequireAuth>
+            // <RequireAuth>
+            //   <PokemonListing />
+            // </RequireAuth>
+            <PokemonListing />
           }
         />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </div>
   );

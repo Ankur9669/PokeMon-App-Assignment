@@ -11,15 +11,12 @@ const PokemonListing = () => {
 
   useEffect(() => {
     dispatch(getPokemons());
-    console.log(user);
   }, []);
-  useEffect(() => {
-    console.log(pokemons);
-  }, [pokemons]);
+
   return (
     <div className="pokemon-listing-page">
-      {pokemons.map((pokemon) => (
-        <PokemonCard pokemonDetails={pokemon} />
+      {pokemons.map((pokemon, index) => (
+        <PokemonCard pokemonDetails={pokemon} key={pokemon.id} index={index} />
       ))}
     </div>
   );

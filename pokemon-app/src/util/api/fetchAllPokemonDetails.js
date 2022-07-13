@@ -17,7 +17,7 @@ export const fetchAllPokemonDetails = async (pokemons) => {
     };
   });
 
-  //   console.log(allPokemonDetails);
   let extractedPokemonDetails = extractPokemonDetails(allPokemonDetails);
+
   return extractedPokemonDetails;
 };
