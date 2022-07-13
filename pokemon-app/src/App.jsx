@@ -12,13 +12,13 @@ function App() {
         <Route
           path="/"
           element={
-            // <RequireAuth>
-            //   <PokemonListing />
-            // </RequireAuth>
-            <PokemonListing />
+            <RequireAuth>
+              <PokemonListing />
+            </RequireAuth>
+            // <PokemonListing />
           }
         />
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );
