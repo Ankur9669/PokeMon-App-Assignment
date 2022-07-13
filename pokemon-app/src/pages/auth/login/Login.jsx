@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../../firebase";
@@ -46,30 +46,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// useEffect(() => {
-//   const google = window.google;
-//   google.accounts.id.initialize({
-//     client_id: CLIENT_ID,
-//     callback: handleCallBackResponse,
-//   });
-
-//   // Rendering the sign in button
-//   google.accounts.id.renderButton(document.getElementById("sign-in-div"), {
-//     theme: "outline",
-//     size: "large",
-//   });
-// }, []);
-
-// useScript("https://accounts.google.com/gsi/client", () => {
-//   window.google.accounts.id.initialize({
-//     client_id: CLIENT_ID,
-//     callback: handleCallBackResponse,
-//   });
-
-//   //  Rendering the sign in button
-//   window.google.accounts.id.renderButton(googleButtonRef.current, {
-//     theme: "outline",
-//     size: "large",
-//   });
-// });
