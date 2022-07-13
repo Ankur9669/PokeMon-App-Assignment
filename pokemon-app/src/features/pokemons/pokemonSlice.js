@@ -8,15 +8,18 @@ const initialState = {
   loading: false,
 };
 
-const getPokemons = createAsyncThunk("pokemon/getPokemons", async () => {
-  try {
-    let allPokemons = await fetchAllPokemon();
-    let allPokemonDetails = await fetchAllPokemonDetails(allPokemons);
-    return allPokemonDetails;
-  } catch (e) {
-    return e;
+const getPokemons = createAsyncThunk(
+  "pokemon/getPokemons",
+  async (pageNumber) => {
+    try {
+      let allPokemons = await fetchAllPokemon();
+      let allPokemonDetails = await fetchAllPokemonDetails(allPokemons);
+      return { pageNumber: pageNumber, pokemons: allPokemonDetails };
+    } catch (e) {
+      return e;
+    }
   }
-});
+);
 const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
@@ -27,7 +30,12 @@ const pokemonSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getPokemons.fulfilled, (state, action) => {
-      state.pokemons = [...action.payload];
+      console.log(action.payload);
+      if (action.pageNumber === 1) {
+        state.pokemons = [...action.payload.pokemons];
+      } else {
+        state.pokemons = [...state.pokemons, ...action.payload.pokemons];
+      }
       state.loading = false;
     });
 
