@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./pokemonlisting.css";
 import { getPokemons } from "../../features/pokemons/pokemonSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -9,9 +9,10 @@ const PokemonListing = () => {
   const dispatch = useAppDispatch();
   const { pokemons } = useAppSelector((state) => state.pokemon);
   const { user } = useAppSelector((state) => state.auth);
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
   useEffect(() => {
-    dispatch(getPokemons());
+    dispatch(getPokemons(1));
   }, []);
 
   return (
