@@ -1,6 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { useScript } from "../../../hooks/useScript";
 import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../../../firebase";
+import { GoogleButton } from "react-google-button";
+import {
   decodeJWTToken,
   useAppDispatch,
   authActions,
@@ -26,22 +35,22 @@ const Login = () => {
     navigate("/pokemonlisting");
   };
 
-  useScript("https://accounts.google.com/gsi/client", () => {
-    window.google.accounts.id.initialize({
-      client_id: CLIENT_ID,
-      callback: handleCallBackResponse,
-    });
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+  };
 
-    //  Rendering the sign in button
-    window.google.accounts.id.renderButton(googleButtonRef.current, {
-      theme: "outline",
-      size: "large",
-    });
-  });
-
+  const handleGoogleSignInClick = async () => {
+    try {
+      await googleSignIn();
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div id="sign-in-div" className="login-page">
-      <div ref={googleButtonRef}></div>
+      {/* <div ref={googleButtonRef}></div> */}
+      <GoogleButton onClick={handleGoogleSignInClick} />
     </div>
   );
 };
@@ -61,3 +70,16 @@ export default Login;
 //     size: "large",
 //   });
 // }, []);
+
+// useScript("https://accounts.google.com/gsi/client", () => {
+//   window.google.accounts.id.initialize({
+//     client_id: CLIENT_ID,
+//     callback: handleCallBackResponse,
+//   });
+
+//   //  Rendering the sign in button
+//   window.google.accounts.id.renderButton(googleButtonRef.current, {
+//     theme: "outline",
+//     size: "large",
+//   });
+// });
