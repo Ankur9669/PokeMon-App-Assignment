@@ -7,9 +7,11 @@ import PokemonCard from "../../components/pokemoncard/PokemonCard";
 const PokemonListing = () => {
   const dispatch = useAppDispatch();
   const { pokemons } = useAppSelector((state) => state.pokemon);
+  const { user } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getPokemons());
+    console.log(user);
   }, []);
   useEffect(() => {
     console.log(pokemons);
