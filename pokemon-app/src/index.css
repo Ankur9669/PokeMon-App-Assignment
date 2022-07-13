@@ -1,4 +1,5 @@
 body {
+  box-sizing: border-box;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -11,3 +12,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+:root{
+
+  --pokemon-normal: #A8A8A8;
+
+  --navbar-color: #282928;
+  --color-white: #ffffff;
+  --color-light-green: #4fb848;
+  --color-light-orange: #de8c5d;
+  --color-light-blue: #5c5fed;
+  --color-light-red: #ed6b6b;
+  --color-red: #f22e2e;
+  --font-size-small: 0.5rem;
+  --font-size-medium: 1rem;
+  --font-size-large: 1.5rem;
+  --font-weight-semi-bold: 500;
+  --font-weight-bold: 600;
+  --font-weight-extra-bold: 700;
+}
+
+
+
