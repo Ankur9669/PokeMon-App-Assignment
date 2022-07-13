@@ -4,4 +4,4 @@
     X-Frame-Options = "SAMEORIGIN"
     X-XSS-Protection = "0"
     X-Content-Type-Options = "nosniff"
-    Content-Security-Policy = "default-src 'self'; style-src 'self'; form-action 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'self';"
+    Content-Security-Policy =  style-src 'https://accounts.google.com/gsi/style';  script-src 'https://accounts.google.com/gsi/client'; connect-src 'https://accounts.google.com/gsi/';"
