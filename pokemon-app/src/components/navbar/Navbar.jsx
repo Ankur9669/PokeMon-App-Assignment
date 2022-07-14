@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import Button from "../buttons/Button";
 import "./navbar.css";
-import User from "./user/User";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { authActions } from "../../features/auth/authSlice";
-import { pokemonActions } from "../../features/pokemons/pokemonSlice";
-import { getFilteredPokemons } from "../../util/getFilteredPokemons";
-import SearchItem from "./searchitem/SearchItem";
-import { getAuth, signOut } from "firebase/auth";
+import {
+  User,
+  Button,
+  useAppDispatch,
+  useAppSelector,
+  authActions,
+  getFilteredPokemons,
+  SearchItem,
+  getAuth,
+  signOut,
+  showToast,
+} from "./index";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -16,16 +20,15 @@ const Navbar = () => {
   const [toShowSearchedPokemons, setToShowSearchedPokemons] = useState(false);
   const [searchedPokemons, setSearchedPokemons] = useState([]);
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = async () => {
     const auth = getAuth();
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-    dispatch(authActions.logoutUser());
+    try {
+      await signOut(auth);
+      dispatch(authActions.logoutUser());
+      showToast("SUCCESS", "User Logged Out Successfully");
+    } catch (e) {
+      showToast("ERROR", "Could not Logout User");
+    }
   };
   const handleSearchChange = (e) => {
     if (e.target.value.length > 0) {

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+import {
+  getPokemons,
+  useAppDispatch,
+  useAppSelector,
+  pokemonActions,
+  PokemonCard,
+  Navbar,
+  Button,
+} from "./index";
 import "./pokemonlisting.css";
-import { getPokemons } from "../../features/pokemons/pokemonSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { pokemonActions } from "../../features/pokemons/pokemonSlice";
-import PokemonCard from "../../components/pokemoncard/PokemonCard";
-import Navbar from "../../components/navbar/Navbar";
-import Button from "../../components/buttons/Button";
 
 const PokemonListing = () => {
   const dispatch = useAppDispatch();
@@ -26,12 +29,13 @@ const PokemonListing = () => {
   }, []);
 
   useEffect(() => {
+    // When pokemons would be loaded the button loading state will change
     setMorePokemonsLoading(loading);
   }, [loading]);
 
   const handleOnClickLoadMore = () => {
+    // Load More Pokemons
     if (!morePokemonsLoading) {
-      // setMorePokemonsLoading(true);
       setCurrentClickCount((currentClickCount) => currentClickCount + 1);
     }
   };

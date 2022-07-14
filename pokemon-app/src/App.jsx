@@ -4,10 +4,12 @@ import Login from "./pages/auth/login/Login";
 import PokemonListing from "./pages/pokemonlistingpage/PokemonListing";
 import { Routes, Route } from "react-router-dom";
 import RequireAuth from "./components/requireauth/RequireAuth";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="App">
+      <ToastContainer theme="colored" />
       <Routes>
         <Route
           path="/"
@@ -15,7 +17,6 @@ function App() {
             <RequireAuth>
               <PokemonListing />
             </RequireAuth>
-            // <PokemonListing />
           }
         />
         <Route path="/login" element={<Login />} />

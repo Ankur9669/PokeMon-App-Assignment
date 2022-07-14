@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
-
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../../firebase";
-import { GoogleButton } from "react-google-button";
-import { useAppDispatch, authActions, useNavigate } from "./index";
+import React from "react";
+import {
+  useAppDispatch,
+  authActions,
+  useNavigate,
+  GoogleAuthProvider,
+  signInWithPopup,
+  auth,
+  GoogleButton,
+} from "./index";
 import "./login.css";
 
 const Login = () => {
