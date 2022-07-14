@@ -1,20 +1,44 @@
 import React, { useEffect, useState } from "react";
+import {
+  getPokemons,
+  useAppDispatch,
+  useAppSelector,
+  pokemonActions,
+  PokemonCard,
+  Navbar,
+  Button,
+} from "./index";
 import "./pokemonlisting.css";
-import { getPokemons } from "../../features/pokemons/pokemonSlice";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import PokemonCard from "../../components/pokemoncard/PokemonCard";
-import Navbar from "../../components/navbar/Navbar";
 
 const PokemonListing = () => {
   const dispatch = useAppDispatch();
-  const { pokemons } = useAppSelector((state) => state.pokemon);
-  const { user } = useAppSelector((state) => state.auth);
-  const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const { pokemons, loading } = useAppSelector((state) => state.pokemon);
+  const [currentClickCount, setCurrentClickCount] = useState(1);
+  const [morePokemonsLoading, setMorePokemonsLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(getPokemons(1));
+    // To load pokemons
+    dispatch(getPokemons(currentClickCount));
+  }, [currentClickCount]);
+
+  useEffect(() => {
+    // To remove all the pokemons in the redux store when component unmounts
+    return () => {
+      dispatch(pokemonActions.setPokemons({ pokemons: [] }));
+    };
   }, []);
 
+  useEffect(() => {
+    // When pokemons would be loaded the button loading state will change
+    setMorePokemonsLoading(loading);
+  }, [loading]);
+
+  const handleOnClickLoadMore = () => {
+    // Load More Pokemons
+    if (!morePokemonsLoading) {
+      setCurrentClickCount((currentClickCount) => currentClickCount + 1);
+    }
+  };
   return (
     <div className="pokemon-listing-page">
       <Navbar />
@@ -26,6 +50,13 @@ const PokemonListing = () => {
             index={index}
           />
         ))}
+      </div>
+      <div className="load-more-button-container">
+        <Button
+          buttonText="Load More..."
+          onClick={handleOnClickLoadMore}
+          isLoading={morePokemonsLoading}
+        />
       </div>
     </div>
   );

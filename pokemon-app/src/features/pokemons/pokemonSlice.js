@@ -10,11 +10,11 @@ const initialState = {
 
 const getPokemons = createAsyncThunk(
   "pokemon/getPokemons",
-  async (pageNumber) => {
+  async (clickNumber) => {
     try {
-      let allPokemons = await fetchAllPokemon();
+      let allPokemons = await fetchAllPokemon(clickNumber);
       let allPokemonDetails = await fetchAllPokemonDetails(allPokemons);
-      return { pageNumber: pageNumber, pokemons: allPokemonDetails };
+      return { clickNumber: clickNumber, pokemons: allPokemonDetails };
     } catch (e) {
       return e;
     }
@@ -30,10 +30,11 @@ const pokemonSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getPokemons.fulfilled, (state, action) => {
-      console.log(action.payload);
-      if (action.pageNumber === 1) {
+      if (action.clickNumber === 1) {
+        // This will be the case on the initial load of the pokemon listing page
         state.pokemons = [...action.payload.pokemons];
       } else {
+        // This will be the case when the user clicks load more button
         state.pokemons = [...state.pokemons, ...action.payload.pokemons];
       }
       state.loading = false;

@@ -1,6 +1,16 @@
-import { decodeJWTToken } from "../../../util/decodeJWTToken";
 import { useAppDispatch } from "../../../app/hooks";
 import { authActions } from "../../../features/auth/authSlice";
 import { useNavigate } from "react-router";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../../firebase";
+import { GoogleButton } from "react-google-button";
 
-export { decodeJWTToken, useAppDispatch, authActions, useNavigate };
+export {
+  useAppDispatch,
+  authActions,
+  useNavigate,
+  GoogleAuthProvider,
+  signInWithPopup,
+  auth,
+  GoogleButton,
+};
