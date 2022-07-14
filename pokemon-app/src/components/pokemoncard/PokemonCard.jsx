@@ -7,7 +7,6 @@ const PokemonCard = (props) => {
   const { imageUrl, type, stats, name } = pokemonDetails;
 
   const findBackGroundColorByPokemonType = (pokemonType) => {
-    console.log(pokemonType);
     switch (pokemonType) {
       case "grass":
         return "pokemon-grass";

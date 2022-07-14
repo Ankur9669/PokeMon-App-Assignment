@@ -12,7 +12,7 @@ const getPokemons = createAsyncThunk(
   "pokemon/getPokemons",
   async (pageNumber) => {
     try {
-      let allPokemons = await fetchAllPokemon();
+      let allPokemons = await fetchAllPokemon(pageNumber);
       let allPokemonDetails = await fetchAllPokemonDetails(allPokemons);
       return { pageNumber: pageNumber, pokemons: allPokemonDetails };
     } catch (e) {
@@ -30,7 +30,6 @@ const pokemonSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getPokemons.fulfilled, (state, action) => {
-      console.log(action.payload);
       if (action.pageNumber === 1) {
         state.pokemons = [...action.payload.pokemons];
       } else {
