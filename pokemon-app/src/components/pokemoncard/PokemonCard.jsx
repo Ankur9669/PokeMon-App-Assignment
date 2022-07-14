@@ -1,11 +1,42 @@
 import React from "react";
 import "./pokemon-card.css";
-import uuid from "react-uuid";
-import { findBackGroundColorByPokemonType } from "../../util/findBackGroundColorByPokemonType";
+import {
+  uuid,
+  BsFillHeartFill,
+  findBackGroundColorByPokemonType,
+  findIfPokemonExists,
+  useAppDispatch,
+  useAppSelector,
+  pokemonActions,
+  showToast,
+} from "./index";
 
 const PokemonCard = (props) => {
   const { pokemonDetails, index } = props;
   const { imageUrl, type, stats, name } = pokemonDetails;
+  const { savedPokemons } = useAppSelector((state) => state.pokemon);
+  const dispatch = useAppDispatch();
+
+  const isPokemonInSavedList = findIfPokemonExists(
+    savedPokemons,
+    pokemonDetails
+  );
+
+  const handleOnClickLikeIcon = () => {
+    if (isPokemonInSavedList) {
+      //Remove from list
+      let newSavedPokemons = savedPokemons.filter(
+        (pokemon) => pokemon.id !== pokemonDetails.id
+      );
+      dispatch(pokemonActions.setSavedPokemons({ pokemons: newSavedPokemons }));
+      showToast("SUCCESS", "Item removed from saved");
+    } else {
+      // Save in List
+      let newSavedPokemons = [...savedPokemons, pokemonDetails];
+      dispatch(pokemonActions.setSavedPokemons({ pokemons: newSavedPokemons }));
+      showToast("SUCCESS", "Item saved");
+    }
+  };
 
   return (
     <div
@@ -26,6 +57,12 @@ const PokemonCard = (props) => {
       <p className="pokemon-text-container">{type}</p>
 
       <div className="pokemon-content-overlay">
+        <BsFillHeartFill
+          className={`like-icon ${
+            isPokemonInSavedList ? "liked-pokemon" : "unliked-pokemon"
+          }`}
+          onClick={handleOnClickLikeIcon}
+        />
         {stats.map((statsItem) => (
           <div className="pokemon-stats-item" key={uuid()}>
             <p className="pokemon-stats-title pokemon-stats-text">

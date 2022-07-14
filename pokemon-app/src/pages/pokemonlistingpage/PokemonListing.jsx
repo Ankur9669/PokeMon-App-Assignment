@@ -12,20 +12,16 @@ import "./pokemonlisting.css";
 
 const PokemonListing = () => {
   const dispatch = useAppDispatch();
-  const { pokemons, loading } = useAppSelector((state) => state.pokemon);
-  const [currentClickCount, setCurrentClickCount] = useState(1);
+  const { pokemons, loading, currentClickCount } = useAppSelector(
+    (state) => state.pokemon
+  );
   const [morePokemonsLoading, setMorePokemonsLoading] = useState(false);
 
   useEffect(() => {
-    // To load pokemons
-    dispatch(getPokemons(currentClickCount));
-  }, [currentClickCount]);
-
-  useEffect(() => {
-    // To remove all the pokemons in the redux store when component unmounts
-    return () => {
-      dispatch(pokemonActions.setPokemons({ pokemons: [] }));
-    };
+    // Initial Loading of pokemons
+    if (pokemons.length === 0) {
+      dispatch(getPokemons(currentClickCount));
+    }
   }, []);
 
   useEffect(() => {
@@ -36,7 +32,8 @@ const PokemonListing = () => {
   const handleOnClickLoadMore = () => {
     // Load More Pokemons
     if (!morePokemonsLoading) {
-      setCurrentClickCount((currentClickCount) => currentClickCount + 1);
+      dispatch(getPokemons(currentClickCount + 1));
+      dispatch(pokemonActions.increaseClickCount());
     }
   };
   return (
