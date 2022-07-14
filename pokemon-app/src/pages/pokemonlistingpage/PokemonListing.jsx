@@ -9,8 +9,9 @@ import Button from "../../components/buttons/Button";
 
 const PokemonListing = () => {
   const dispatch = useAppDispatch();
-  const { pokemons } = useAppSelector((state) => state.pokemon);
+  const { pokemons, loading } = useAppSelector((state) => state.pokemon);
   const [currentClickCount, setCurrentClickCount] = useState(1);
+  const [morePokemonsLoading, setMorePokemonsLoading] = useState(false);
 
   useEffect(() => {
     // To load pokemons
@@ -24,8 +25,15 @@ const PokemonListing = () => {
     };
   }, []);
 
+  useEffect(() => {
+    setMorePokemonsLoading(loading);
+  }, [loading]);
+
   const handleOnClickLoadMore = () => {
-    setCurrentClickCount((currentClickCount) => currentClickCount + 1);
+    if (!morePokemonsLoading) {
+      // setMorePokemonsLoading(true);
+      setCurrentClickCount((currentClickCount) => currentClickCount + 1);
+    }
   };
   return (
     <div className="pokemon-listing-page">
@@ -40,7 +48,11 @@ const PokemonListing = () => {
         ))}
       </div>
       <div className="load-more-button-container">
-        <Button buttonText="Load More..." onClick={handleOnClickLoadMore} />
+        <Button
+          buttonText="Load More..."
+          onClick={handleOnClickLoadMore}
+          isLoading={morePokemonsLoading}
+        />
       </div>
     </div>
   );
