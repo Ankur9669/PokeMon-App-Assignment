@@ -8,6 +8,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { showToast } from "../../util/toasts/showToast";
 import { BsFillHeartFill } from "react-icons/bs";
 import { useNavigate } from "react-router";
+import { pokemonActions } from "../../features/pokemons/pokemonSlice";
 
 export {
   User,
@@ -22,4 +23,5 @@ export {
   showToast,
   BsFillHeartFill,
   useNavigate,
+  pokemonActions,
 };

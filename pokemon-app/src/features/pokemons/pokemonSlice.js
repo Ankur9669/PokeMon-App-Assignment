@@ -35,6 +35,9 @@ const pokemonSlice = createSlice({
     increaseClickCount: (state) => {
       state.currentClickCount = state.currentClickCount + 1;
     },
+    reset: (state) => {
+      state = initialState;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getPokemons.fulfilled, (state, action) => {

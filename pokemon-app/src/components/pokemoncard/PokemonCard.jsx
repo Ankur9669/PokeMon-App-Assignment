@@ -68,7 +68,9 @@ const PokemonCard = (props) => {
             <p className="pokemon-stats-title pokemon-stats-text">
               {statsItem.key}
             </p>
+            <label htmlFor={`${statsItem.value}`}></label>
             <progress
+              id={statsItem.value}
               value={statsItem.value}
               max="100"
               className="pokemon-stats-slider"

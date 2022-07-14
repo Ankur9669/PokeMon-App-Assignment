@@ -13,6 +13,7 @@ import {
   showToast,
   BsFillHeartFill,
   useNavigate,
+  pokemonActions,
 } from "./index";
 
 const Navbar = () => {
@@ -28,6 +29,7 @@ const Navbar = () => {
     try {
       await signOut(auth);
       dispatch(authActions.logoutUser());
+      dispatch(pokemonActions.reset());
       showToast("SUCCESS", "User Logged Out Successfully");
     } catch (e) {
       showToast("ERROR", "Could not Logout User");
