@@ -8,7 +8,6 @@
     margin: 1rem;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    cursor: pointer;
 }
 .pokemon-card-container:hover .pokemon-content-overlay {
     opacity: 1;
@@ -42,7 +41,7 @@
     object-fit: contain;
 }
 .pokemon-text-container {
-    margin: 0.5rem 1rem;
+    margin: 0.9rem 1rem;
     color: var(--color-white);
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-bold);
@@ -51,6 +50,17 @@
     background-color: gray;
     padding: 0.1rem 0.5rem;
     border-radius: 0.3rem;
+}
+.like-icon {
+    cursor: pointer;
+    margin: 0.5rem 0;
+    font-size: var(--font-size-large);
+}
+.liked-pokemon {
+    color: var(--color-red);
+}
+.unliked-pokemon {
+    color: var(--color-white);
 }
 
 /* overlay css */
@@ -78,24 +88,7 @@
 
 
 /*  */
-/* --pokemon-normal: #A8A8A8;
-  --pokemon-fire: #F08030;
-  --pokemon-water: #6890F0;
-  --pokemon-grass: #78C850;
-  --pokemon-electric: #F8D030;
-  --pokemon-ice: #98D8D8;
-  --pokemon-fighting: #C03028;
-  --pokemon-poison: #A040A0;
-  --pokemon-ground: #E0C068;
-  --pokemon-flying: #A890F0;
-  --pokemon-psychic: #F85888;
-  --pokemon-bug: #A8B820;
-  --pokemon-rock: #B8A038;
-  --pokemon-ghost: #705898;
-  --pokemon-dark: #705848;
-  --pokemon-dragon: #7038F8;
-  --pokemon-steel: #F8F8F8;
-  --pokemon-fairy: #F0B6BC; */
+
 .pokemon-normal {
     background-color: var(--pokemon-normal);
 }

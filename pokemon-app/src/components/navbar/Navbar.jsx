@@ -11,10 +11,14 @@ import {
   getAuth,
   signOut,
   showToast,
+  BsFillHeartFill,
+  useNavigate,
+  pokemonActions,
 } from "./index";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { pokemons } = useAppSelector((state) => state.pokemon);
   const [searchValue, setSearchValue] = useState("");
   const [toShowSearchedPokemons, setToShowSearchedPokemons] = useState(false);
@@ -25,6 +29,7 @@ const Navbar = () => {
     try {
       await signOut(auth);
       dispatch(authActions.logoutUser());
+      dispatch(pokemonActions.reset());
       showToast("SUCCESS", "User Logged Out Successfully");
     } catch (e) {
       showToast("ERROR", "Could not Logout User");
@@ -43,7 +48,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navbar-app-container">
-        <div>
+        <div onClick={() => navigate("/")}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg"
             alt="pokeball"
@@ -68,6 +73,10 @@ const Navbar = () => {
         </div>
 
         <div className="user-details-button-container">
+          <BsFillHeartFill
+            className="saved-pokemons-icon"
+            onClick={() => navigate("/saved-pokemons")}
+          />
           <Button buttonText="Logout" onClick={handleLogoutClick} />
           <div className="user-details">
             <User />

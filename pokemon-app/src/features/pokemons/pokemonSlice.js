@@ -4,8 +4,10 @@ import { fetchAllPokemonDetails } from "../../util/api/fetchAllPokemonDetails";
 
 const initialState = {
   pokemons: [],
+  savedPokemons: [],
   error: "",
   loading: false,
+  currentClickCount: 1,
 };
 
 const getPokemons = createAsyncThunk(
@@ -14,7 +16,7 @@ const getPokemons = createAsyncThunk(
     try {
       let allPokemons = await fetchAllPokemon(clickNumber);
       let allPokemonDetails = await fetchAllPokemonDetails(allPokemons);
-      return { clickNumber: clickNumber, pokemons: allPokemonDetails };
+      return { pokemons: allPokemonDetails };
     } catch (e) {
       return e;
     }
@@ -26,6 +28,15 @@ const pokemonSlice = createSlice({
   reducers: {
     setPokemons: (state, action) => {
       state.pokemons = action.payload.pokemons;
+    },
+    setSavedPokemons: (state, action) => {
+      state.savedPokemons = action.payload.pokemons;
+    },
+    increaseClickCount: (state) => {
+      state.currentClickCount = state.currentClickCount + 1;
+    },
+    reset: (state) => {
+      state = initialState;
     },
   },
   extraReducers: (builder) => {

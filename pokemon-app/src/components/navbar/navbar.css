@@ -5,6 +5,12 @@
     justify-content: center;
     background-color: var(--navbar-color);
 }
+.saved-pokemons-icon {
+    font-size: var(--font-size-large);
+    color: var(--color-red);
+    cursor: pointer;
+    margin: 0 1rem;
+}
 .navbar-pokeball-icon {
     cursor: pointer;
     height: 50px;

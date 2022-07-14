@@ -5,6 +5,7 @@ import PokemonListing from "./pages/pokemonlistingpage/PokemonListing";
 import { Routes, Route } from "react-router-dom";
 import RequireAuth from "./components/requireauth/RequireAuth";
 import { ToastContainer } from "react-toastify";
+import SavedPokemons from "./pages/savedpokemons/SavedPokemons";
 
 function App() {
   return (
@@ -16,6 +17,14 @@ function App() {
           element={
             <RequireAuth>
               <PokemonListing />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/saved-pokemons"
+          element={
+            <RequireAuth>
+              <SavedPokemons />
             </RequireAuth>
           }
         />
